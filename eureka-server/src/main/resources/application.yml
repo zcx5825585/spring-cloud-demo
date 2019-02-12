@@ -1,0 +1,24 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: eureka-server
+
+DS:
+  name: server1
+  port: 9001
+
+eureka:
+  instance:
+    hostname: server1
+  server:
+    # 测试时关闭自我保护机制，保证不可用服务及时踢出
+    enable-self-preservation: false
+  client:
+    #表示是否将自己注册在EurekaServer上,单节点false
+    register-with-eureka: false
+    #表示表示是否从EurekaServer获取注册信息,单节点false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${DS.name}:${DS.port}/eureka/
