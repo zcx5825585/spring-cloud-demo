@@ -18,17 +18,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 public class ServiceController {
 
-    @Value("${server.port}")
-    String port;
     @Autowired
     private UserService userService;
+
+    @Value("${server.port}")
+    String port;
+    @Value("${spring.application.name}")
+    String serverName;
     @Value("${foo}")
     private String foo;
 
     @RequestMapping("testFeign")
     public String testFeign() {
         System.out.println("service");
-        return "service-test:" + userService.getUser();
+        return  serverName+":"+port;
+//        return "service-test:" + userService.getUser();
     }
 
     @RequestMapping("foo")
